@@ -1,9 +1,9 @@
 FROM openjdk:alpine
 
-EXPOSE 8080
-RUN apk add --no-cache git
+EXPOSE 80
 RUN apk add --no-cache maven
-RUN git clone https://github.com/iOctav/json_validator.git
-WORKDIR /json_validator
-RUN mvn clean install -e
-CMD mvn exec:java -e
+RUN mkdir /api
+COPY . /api
+RUN mvn package -f /api/pom.xml
+ADD /target/json_validator-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
