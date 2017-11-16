@@ -1,6 +1,6 @@
-FROM openjdk:7-jdk-alpine
+FROM openjdk:alpine
 
-EXPOSE 8090
+EXPOSE 8080
 RUN apk add --no-cache git
 RUN apk add --no-cache maven
 RUN git clone https://github.com/iOctav/json_validator.git
