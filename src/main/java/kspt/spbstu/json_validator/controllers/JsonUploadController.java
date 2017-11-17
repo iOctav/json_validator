@@ -1,14 +1,12 @@
 package kspt.spbstu.json_validator.controllers;
 
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import kspt.spbstu.json_validator.validators.JsonValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.*;
 
 @RestController
 public class JsonUploadController {
@@ -16,21 +14,17 @@ public class JsonUploadController {
 
     @PostMapping
     public ResponseEntity uploadFile(@RequestBody String input) {
-        ObjectMapper mapper = new ObjectMapper();
+        String decodedInput;
         try {
-            String decodedInput = URLDecoder.decode(input, "UTF-8");
-            mapper.readValue(decodedInput, Object.class);
+            decodedInput = URLDecoder.decode(input, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            return new ResponseEntity(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+        }
+        String result = new JsonValidator().validateJson(decodedInput);
+        if (result == null) {
             return new ResponseEntity(decodedInput, HttpStatus.OK);
-        } catch (final IOException ex_ser) {
-            Map<String, String> errorMap = new HashMap<String, String>() {{
-                //put("errorCode", filename);
-                put("errorMessage", ex_ser.getMessage().split("\n at ")[0]);
-                put("errorPlace", ex_ser.getMessage().split("; ")[1]
-                    .substring(0,ex_ser.getMessage().split("; ")[1].length()-2));
-                //put("resource", request.getPathInfo());
-                //put("request-id", request.getRequestedSessionId());
-            }};
-            return new ResponseEntity(errorMap, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity(result, HttpStatus.CONFLICT);
         }
     }
 }
