@@ -12,7 +12,6 @@ public class JsonValidator {
     public String validateJson(String json) {
         try {
             new JSONObject(json);
-            new JSONArray(json);
         } catch (JSONException ex) {
             return errorMapping(ex);
         }
