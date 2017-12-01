@@ -1,9 +1,5 @@
-FROM openjdk:alpine
-
-EXPOSE 80
-RUN apk add --no-cache maven
-ADD src /json_validator/src
-ADD pom.xml /json_validator/pom.xml
-WORKDIR /json_validator
-RUN mvn clean install -e
-CMD mvn exec:java -e
+FROM openjdk:8-jdk-alpine
+VOLUME /tmp
+ARG JAR_FILE
+ADD json_validator-boot-docker-0.1.0.jar app.jar
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]

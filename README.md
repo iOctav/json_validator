@@ -15,10 +15,11 @@ The JSON Validation Service (JVS) is a validator that allows every users to chec
 
 ## Deployment
 
-Run and build the Docker image:
+Build gradle package and run Docker image:
 
 ```shell
-$ docker build -t validation-service github.com/iOctav/json_validator && docker run -t --rm -p 80:80 validation-service
+$ ./gradlew build docker
+$ docker run -d -p 80:80 kspt.spbstu/json_validator
 ```
 
 To test that JVS is working properly, make a POST request as shown below:
