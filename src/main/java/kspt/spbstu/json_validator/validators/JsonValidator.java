@@ -9,6 +9,11 @@ import java.util.Map;
 
 public class JsonValidator {
 
+    /**
+     *
+     * @param json
+     * @return formatted json or error of format
+     */
     public String validateJson(String json) {
         try {
             new JSONObject(json);
@@ -18,6 +23,11 @@ public class JsonValidator {
         return null;
     }
 
+    /**
+     *
+     * @param exception
+     * @return Formmated json error
+     */
     private String errorMapping(final JSONException exception) {
         Map<String, String> errorMap = new HashMap<String, String>() {{
             //put("errorCode", filename);
