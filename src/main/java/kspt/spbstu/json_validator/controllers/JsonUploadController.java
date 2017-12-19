@@ -11,7 +11,11 @@ import java.net.URLDecoder;
 @RestController
 public class JsonUploadController {
 
-
+    /**
+     *
+     * @param input
+     * @return HTTP response with formatted input json or error of json format
+     */
     @PostMapping
     public ResponseEntity uploadFile(@RequestBody String input) {
         return getResponseEntity(input);
