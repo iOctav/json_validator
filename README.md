@@ -25,7 +25,13 @@ $ docker run -d -p 80:80 kspt.spbstu/json_validator
 To test that JVS is working properly, make a POST request as shown below:
 
 ```shell
-s curl -s --data-binary @filename.json http://localhost:80
+s curl --data-binary @filename.json http://localhost:80
+```
+
+Or PUT request as shown below:
+
+```shell
+s curl --upload-file filename.json http://localhost:80
 ```
 
 ## License
