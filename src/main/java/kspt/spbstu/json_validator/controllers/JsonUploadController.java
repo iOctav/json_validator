@@ -27,4 +27,20 @@ public class JsonUploadController {
             return new ResponseEntity(result, HttpStatus.CONFLICT);
         }
     }
+
+    @PutMapping
+    public ResponseEntity uploadFilePut(@RequestBody String input) {
+        String decodedInput;
+        try {
+            decodedInput = URLDecoder.decode(input, "UTF-8");
+        } catch (UnsupportedEncodingException ex) {
+            return new ResponseEntity(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
+        }
+        String result = new JsonValidator().validateJson(decodedInput);
+        if (result == null) {
+            return new ResponseEntity(decodedInput, HttpStatus.OK);
+        } else {
+            return new ResponseEntity(result, HttpStatus.CONFLICT);
+        }
+    }
 }
