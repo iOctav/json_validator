@@ -3,6 +3,9 @@ package kspt.spbstu.json_validator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/** Main Application class
+ * @author Andrei
+ */
 @SpringBootApplication
 public class JsonValidatorApplication {
 	/**

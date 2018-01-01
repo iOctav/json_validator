@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+/** Controller
+ * @author Andrei
+ */
 @RestController
 public class JsonUploadController {
 
@@ -21,6 +24,11 @@ public class JsonUploadController {
         return getResponseEntity(input);
     }
 
+    /**
+     *
+     * @param input
+     * @return HTTP response with formatted input json or error of json format
+     */
     @PutMapping
     public ResponseEntity uploadFilePut(@RequestBody String input) {
         return getResponseEntity(input);
