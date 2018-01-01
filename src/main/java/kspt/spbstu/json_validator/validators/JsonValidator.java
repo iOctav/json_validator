@@ -1,6 +1,5 @@
 package kspt.spbstu.json_validator.validators;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,11 +19,11 @@ public class JsonValidator {
 
     private String errorMapping(final JSONException exception) {
         Map<String, String> errorMap = new HashMap<String, String>() {{
-            //put("errorCode", filename);
+            put("errorCode", "12345");
             put("errorMessage", exception.getMessage().split(" at ")[0]);
             put("errorPlace", exception.getMessage().split(" at ")[1]);
-            //put("resource", request.getPathInfo());
-            //put("request-id", request.getRequestedSessionId());
+            put("resource", "filename.json");
+            put("request-id", "12345");
         }};
         return errorMap.toString();
     }
