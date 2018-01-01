@@ -6,8 +6,16 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/** Class for validation
+ * @author Andrei
+ */
 public class JsonValidator {
 
+    /**
+     *
+     * @param json
+     * @return formatted json or error of format
+     */
     public String validateJson(String json) {
         try {
             new JSONObject(json);
@@ -17,6 +25,11 @@ public class JsonValidator {
         return null;
     }
 
+    /**
+     *
+     * @param exception
+     * @return Formmated json error
+     */
     private String errorMapping(final JSONException exception) {
         Map<String, String> errorMap = new HashMap<String, String>() {{
             put("errorCode", "12345");
